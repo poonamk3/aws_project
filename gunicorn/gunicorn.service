@@ -6,8 +6,15 @@ After=network.target
 User=ubuntu
 Group=www-data
 WorkingDirectory=/home/ubuntu/myaws_project
-ExecStart=/home/ubuntu/env/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/ubuntu/myaws_project/blog/blog.sock blog.wsgi:application
+ExecStart=/home/ubuntu/env/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+         myaws_project.wsgi:application
 
        
 [Install]
 WantedBy=multi-user.target
+
+
+
